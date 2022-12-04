@@ -304,7 +304,7 @@ contractAddress = '0x1dC2dB22587C93ec73076B63053BBFfa6b495cd2';
         var thisdate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var info = "<br><br><b>Ngay cap nhat: "+thisdate+"</b><br>Loai trai cay: "+type +"</b><br>Ngay thu hoach: "+date+"<br>Ten nha cung cap: "+username;;
         web3.eth.getAccounts().then(async function(accounts) {
-          var receipt = await contract.methods.update(prodid, info).send({ from: accounts[4], gas: 1000000 })
+          var receipt = await contract.methods.update(prodid, info).send({ from: accounts[2], gas: 1000000 })
           .then(receipt => {
               var msg="Cập nhật thành công ";
               $("#alertText").html(msg);

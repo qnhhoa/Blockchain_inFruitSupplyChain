@@ -33,17 +33,17 @@
         </li>
       <?php
       }
-      if ($_SESSION['role']==2 ){
+      if ($_SESSION['role']==3 ){
         ?>
           <li class="nav-item">
-            <a class="nav-link" href="updatebaoquan.php">Cập nhật bán lẻ</a>
+            <a class="nav-link" href="updatesanxuat.php">Cập nhật nhập kho</a>
           </li>
         <?php
         }
       if ($_SESSION['role']==3 ){
         ?>
           <li class="nav-item">
-            <a class="nav-link" href="updatesanxuat.php">Cập nhật sản xuất</a>
+            <a class="nav-link" href="updatebaoquan.php">Cập nhật xuất kho</a>
           </li>
         <?php
         }

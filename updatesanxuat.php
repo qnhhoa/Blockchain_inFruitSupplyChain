@@ -12,7 +12,7 @@ $color="navbar-dark cyan darken-3";
     <link rel="SHORTCUT ICON" href="images/fibble.png" type="image/x-icon" />
     <link rel="ICON" href="images/fibble.png" type="image/ico" />
 
-    <title>Cập nhật sản xuất</title>
+    <title>Cập nhật nhập kho</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">

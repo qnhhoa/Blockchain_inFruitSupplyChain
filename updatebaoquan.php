@@ -12,7 +12,7 @@ $color="navbar-dark cyan darken-3";
     <link rel="SHORTCUT ICON" href="images/fibble.png" type="image/x-icon" />
     <link rel="ICON" href="images/fibble.png" type="image/ico" />
 
-    <title>Cập nhật bán lẻ</title>
+    <title>Cập nhật xuất kho</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -23,7 +23,7 @@ $color="navbar-dark cyan darken-3";
 
   </head>
   <?php
-    if( $_SESSION['role']==2  ){
+    if( $_SESSION['role']==3  ){
   ?>
   <body class="violetgradient">
     <?php include 'navbar.php'; ?>
@@ -45,7 +45,7 @@ $color="navbar-dark cyan darken-3";
                 <h5> Điền thông tin cập nhật </h5>
                 <form id="form2" autocomplete="off">
                     <div class="formitem">
-                        <label type="text" class="formlabel"> Mã lô nhập kho </label>
+                        <label type="text" class="formlabel"> Mã lô xuất kho </label>
                         <input type="text" class="forminput" id="prodid" onkeypress="isInputNumber(event)" required>
                         <label class=qrcode-text-btn style="width:4%;display:none;">
                             <input type=file accept="image/*" id="selectedFile" style="display:none" capture=environment onchange="openQRCamera(this);" tabindex=-1>
@@ -55,10 +55,13 @@ $color="navbar-dark cyan darken-3";
 		                </button
                     </div>
                     <div class="formitem">
-                        <label type="text" class="formlabel"> Hướng dẫn bảo quản </label>
-                        <input type="text" class="forminput" id="huongdan" required>
-                        <label type="text" class="formlabel"> Nhiệt độ bảo quản </label>
-                        <input type="text" class="forminput" id="nhietdo" required>
+                        <label type="text" class="formlabel"> Tên kho hàng </label>
+                        <input type="text" class="forminput" id="tenkho" required>
+                        <label type="text" class="formlabel"> Trọng lượng </label>
+                        <input type="text" class="forminput" id="trongluong" required>
+                        <label type="text" class="formlabel"> Kiểm định chất lượng </label>
+                        <input type="text" class="forminput" id="chatluong" required>
+                        <input type="hidden" class="forminput" id="user" value=<?php echo $_SESSION['username']; ?> required>
                     </div>
                     <button class="formbtn" id="mansub" type="submit">Cập nhật</button>
                 </form>
@@ -291,14 +294,16 @@ contractAddress = '0x1dC2dB22587C93ec73076B63053BBFfa6b495cd2';
     $('#form2').on('submit', function(event) {
         event.preventDefault(); // to prevent page reload when form is submitted
         prodid = $('#prodid').val();
-        huongdan = $('#huongdan').val();
-        nhietdo = $('#nhietdo').val();
+        tenkho = $('#tenkho').val();
+        trongluong = $('#trongluong').val();
+        chatluong = $('#chatluong').val();
+        username = $('#user').val(); 
         console.log(prodid);
         var today = new Date();
         var thisdate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var info = "<br><br><b>Ngay cap nhat: "+thisdate+"</b><br>Huong dan bao quan: "+huongdan+"</b><br>Nhiet do bao quan: "+nhietdo;
+        var info = "<br><br><b>Ngay xuat kho: "+thisdate+"</b><br>Ten kho hang: "+tenkho+"</b><br>Trong luong: "+trongluong+"</b><br>Kiem dinh chat luong: "+chatluong+"<br>Xuat kho tu nha may: "+username;
         web3.eth.getAccounts().then(async function(accounts) {
-          var receipt = await contract.methods.update(prodid, info).send({ from: accounts[2], gas: 1000000 })
+          var receipt = await contract.methods.update(prodid, info).send({ from: accounts[3], gas: 1000000 })
           .then(receipt => {
               var msg="Cập nhật thành công ";
               $("#alertText").html(msg);
